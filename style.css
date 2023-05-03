@@ -1,0 +1,249 @@
+@charset "UTF-8";
+@import url("https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;0,900;1,300;1,400;1,700;1,900&display=swap");
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body {
+  width: 100%;
+  min-width: 480px;
+  color: #333;
+  background-color: #F8F8F8;
+  font-family: "Merriweather", "PingFang", sans-serif, serif;
+}
+
+a {
+  display: block;
+  text-decoration: none;
+}
+
+a:visited {
+  color: hsl(60, 15%, 20%);
+}
+
+ul {
+  list-style: none;
+}
+
+img {
+  max-width: 100%;
+  vertical-align: top;
+}
+
+.header {
+  background-color: #A20832;
+  margin-bottom: 25px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 40px 0;
+}
+@media (max-width: 992px) {
+  .header {
+    padding: 40px 20px;
+  }
+}
+
+.container {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.header__title {
+  text-align: center;
+  margin-bottom: 20px;
+}
+.header__title h1 {
+  color: white;
+  font-size: 48px;
+  font-weight: 400;
+  letter-spacing: 3;
+}
+.header__title h2 {
+  margin-top: 20px;
+  color: white;
+  font-weight: 300;
+}
+@media (max-width: 992px) {
+  .header__title h2 {
+    font-size: 18px;
+  }
+}
+
+.search {
+  text-align: center;
+}
+.search__bar {
+  width: 50%;
+  height: 46px;
+  padding: 6px 14px;
+  outline: none;
+  border: none;
+  border-radius: 8px;
+  background-color: hsl(0, 0%, 91%);
+  margin-right: 5px;
+}
+@media (max-width: 992px) {
+  .search__bar {
+    width: 80%;
+  }
+}
+.search__btn {
+  background-color: #F8F8F8;
+  line-height: 1;
+  font-size: 14px;
+  padding: 15px 20px;
+  border: 1px solid #949494;
+  border-radius: 8px;
+  margin: 0;
+  cursor: pointer;
+}
+.search__btn:hover {
+  transition-duration: 0.25s;
+  background-color: #6C6767;
+  color: white;
+}
+
+.grid-sizer {
+  width: calc((100% - 85px) / 4);
+}
+@media (max-width: 992px) {
+  .grid-sizer {
+    width: calc((100% - 55px) / 2);
+  }
+}
+@media (max-width: 576px) {
+  .grid-sizer {
+    width: calc((100% - 40px) / 1);
+  }
+}
+
+.art {
+  background-color: white;
+  color: hsl(60, 15%, 20%);
+  margin-bottom: 16px;
+  padding: 30px 24px;
+  border: 1px solid #F8F8F8;
+  border-radius: 10px;
+  box-shadow: 0 1px 16px rgba(0, 0, 0, 0.1), 0 1px 1px rgba(0, 0, 0, 0.2);
+  cursor: pointer;
+}
+.art:hover img {
+  transform: scale(1.2);
+  transition-duration: 0.3s;
+  filter: brightness(1);
+}
+.art__imgBox {
+  margin: 0 -24px;
+  margin-top: -30px;
+  margin-bottom: 10px;
+  overflow: hidden;
+  border-radius: 10px 10px 0 0;
+}
+.art__imgBox img {
+  filter: brightness(0.8);
+}
+.art__title {
+  font-size: 24px;
+  line-height: 1.25;
+  margin-top: 20px;
+  margin-bottom: 14px;
+  font-weight: 700;
+}
+.art__artist {
+  font-size: 16px;
+  margin-bottom: 14px;
+  font-weight: 300;
+}
+.art__tagName {
+  display: inline-block;
+  font-size: 12px;
+  background-color: hsl(60, 10%, 93%);
+  border-radius: 3px;
+  font-weight: 300;
+  padding: 1px 6px 2px;
+  margin-bottom: 4px;
+}
+
+.is__hidden {
+  display: none;
+}
+
+.lightbox__wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(0, 0, 0, 0.7);
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  overflow-y: scroll;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transform: scale(0, 0);
+  opacity: 0;
+  transition: transform ease-in-out 0.3s;
+  transition: opacity 0.3s;
+}
+.lightbox__wrap:target {
+  transform: scale(1, 1);
+  opacity: 1;
+}
+.lightbox__item {
+  position: relative;
+  padding: 60px;
+  height: 80%;
+  background-color: black;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+@media (max-width: 992px) {
+  .lightbox__item {
+    padding: 30px;
+  }
+}
+.lightbox__image {
+  height: 75%;
+}
+.lightbox__image img {
+  -o-object-fit: contain;
+     object-fit: contain;
+  height: 100%;
+}
+.lightbox__title, .lightbox__artist {
+  color: white;
+}
+.lightbox__artist {
+  margin-bottom: 15px;
+}
+
+.close {
+  position: absolute;
+  width: 50px;
+  height: 50px;
+  top: 2.5%;
+  right: 2.5%;
+  border-radius: 50%;
+  text-decoration: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+}
+.close::after {
+  content: "✕";
+  color: white;
+  font-size: 40px;
+  font-weight: 700;
+}/*# sourceMappingURL=style.css.map */

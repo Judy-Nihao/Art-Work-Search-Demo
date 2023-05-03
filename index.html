@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="./style.css">
+  <title>Axios 芝加哥美術館作品強搜尋</title>
+</head>
+<body>
+<section class="header">
+  <div class="header__wrap">
+    <div class="header__title">
+      <h1>The Art Institute of Chicago's API</h1>
+      <h2>provides JSON-formatted data as a REST-style service</h2>
+    </div>
+
+    <form class="container search" id="search" >
+      <input type="search" class="search__bar" id="search__bar" placeholder="請輸入英文關鍵字，例如：monet,Vincent van Gogh..."  value="monet">
+      <input type="submit" value="搜尋" id="search__btn" class="search__btn">
+      <!-- 當作按鈕的 input type 必須是 submit 才能在按下 Enter 時，把當下 value 傳給「搜尋按鈕」的 click監聽事件  -->
+    </form>
+  </div>
+</section>
+
+<section class="container grid">
+  <a href="#image_id_01" class="art grid-item grid-sizer">
+    <div class="art__imgBox">
+      <img src="https://picsum.photos/843/1800" alt="">
+    </div>
+  
+    <h3 class="art__title">畫作名稱</h3>
+    <h4 class="art__artist">作者姓名</h4>
+
+    <ul class="art__tag">
+      <li class="art__tagName">類別名稱</li>
+    </ul>
+  </a>
+
+  <div class="lightbox">
+    <div class="lightbox__wrap" id="image_id_01">
+      <div class="lightbox__item">
+        <a href="#" class="close"></a>
+        <div class="lightbox__image">
+          <img src="https://picsum.photos/843/1800" alt="">
+        </div>
+        <p class="art__title lightbox__title">畫作名稱</p>
+        <p class="art__artist lightbox__artist">作者姓名</p>
+        <ul class="art__tag">
+          <li class="art__tagName">類別名稱</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+</section>
+
+<!-- script -->
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/axios/1.4.0/axios.min.js'></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+  <script src="https://unpkg.com/imagesloaded@4/imagesloaded.pkgd.min.js"></script>
+  <script src='https://unpkg.com/masonry-layout@4/dist/masonry.pkgd.min.js'></script>
+  <script src="./script.js"></script>
+</body>
+</html>

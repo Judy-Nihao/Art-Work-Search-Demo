@@ -1,0 +1,301 @@
+@import url('https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;0,900;1,300;1,400;1,700;1,900&display=swap');
+
+@mixin pad{
+  @media(max-width:992px){
+    @content;
+  }
+}
+@mixin mobile{
+  @media(max-width: 576px){
+    @content;
+  }
+}
+
+$color__red: #A20832;
+$color__black: #333;
+$color__bright: #F8F8F8;
+$color__grey: #949494;
+$color__dark-grey:#6C6767;
+$container__padding: 20px;
+
+//共通樣式
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  // outline: 1px solid green;
+}
+
+html, body{
+  width: 100%;
+  min-width: 480px;
+  color: $color__black;
+  background-color: $color__bright;
+  font-family: 'Merriweather', 'PingFang', sans-serif, serif;
+}
+
+a{
+  display: block;
+  text-decoration: none;
+}
+
+a:visited{
+  color: hsl(60, 15%, 20%);
+}
+
+ul{
+  list-style :none;
+}
+
+img{
+  max-width: 100%;
+  vertical-align: top;
+}
+
+
+//頁面主體
+.header{
+  background-color: $color__red;
+  // height: 300px;
+  margin-bottom: 25px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 40px 0;
+  @include pad{
+    padding: 40px 20px;
+  }
+}
+
+.container{
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: $container__padding;
+}
+
+.header__title{
+  text-align: center;
+  margin-bottom: 20px;
+  h1{
+    color: white;
+    font-size: 48px;
+    font-weight: 400;
+    letter-spacing: 3;
+
+  }
+
+  h2{
+    margin-top: 20px;
+    color: white;
+    font-weight: 300;
+    @include pad{
+      font-size: 18px;
+    }
+  }
+}
+
+.search{
+  text-align: center;
+  &__bar{
+    width: 50%;
+    height: 46px;
+    padding: 6px 14px;
+    outline: none;
+    border: none;
+    border-radius: 8px;
+    background-color: hsl(0, 0%, 91%);
+    margin-right: 5px;
+    @include pad{
+      width: 80%;
+    }
+  }
+  &__btn{
+    background-color: $color__bright;
+    line-height: 1;
+    font-size: 14px;
+    padding: 15px 20px;
+    border: 1px solid $color__grey;;
+    border-radius: 8px;
+    margin: 0;
+    cursor: pointer;
+    &:hover{
+      transition-duration: .25s;
+      background-color: $color__dark-grey;
+      color: white;
+    }
+  }
+}
+
+
+// 小卡寬度指定
+// 給 masonry 瀑布排版指定小卡寬度百分比
+// masonry 的 gutter 15px ，分 4 欄，間隔有3條，15*3=45px，再扣掉容器左右 padding，再平均分配給 4 欄，取得每欄寬度。
+.grid-sizer{
+
+  width: calc((100% - (45px + $container__padding * 2)) / 4);
+  
+  @include pad{
+    width: calc((100% - (15px + $container__padding * 2)) / 2)
+  }
+
+  @include  mobile{
+    width: calc((100% - $container__padding * 2) / 1)
+    // width: 100%;
+  }
+}
+
+// -------- 畫作小卡區塊 ------- 
+.art{
+  background-color: white;
+  color: hsl(60, 15%, 20%);
+  margin-bottom: 16px;
+  padding: 30px 24px;
+  border: 1px solid $color__bright;
+  border-radius: 10px;
+  box-shadow: 
+  0 1px 16px rgba(0, 0, 0, 0.1),
+  0 1px 1px rgba(0, 0, 0, 0.2);
+  cursor: pointer;
+
+  &:hover img{
+    transform: scale(1.2);
+    transition-duration: .3s;
+    filter: brightness(1);
+  }
+
+  &__imgBox{
+    margin: 0 -24px;
+    margin-top: -30px;
+    margin-bottom: 10px;
+    overflow: hidden; 
+    border-radius: 10px 10px 0 0 ;
+    img{
+      filter: brightness(.8);
+    }
+  }
+
+  &__title{
+    font-size: 24px;
+    line-height: 1.25;
+    margin-top: 20px;
+    margin-bottom: 14px;
+    font-weight: 700;
+  }
+
+  &__artist{
+    font-size: 16px;
+    margin-bottom: 14px;
+    font-weight: 300;
+  }
+ 
+  &__tagName{
+   display: inline-block;
+   font-size: 12px;
+  //  border: 1px solid $color__grey;
+   background-color: hsl(60, 10%, 93%);
+   border-radius: 3px;
+   font-weight: 300;
+   padding: 1px 6px 2px;
+   margin-bottom: 4px;
+ }
+
+}
+
+
+// 隱藏 undefined 的類別標籤
+.is__hidden{
+  display: none;
+}
+
+//圖片燈箱
+.lightbox { 
+
+  &__wrap{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(0, 0, 0, 0.7);
+
+    position: fixed;
+    // 燈箱層次預設會被瀑布流小卡遮住，所以z-index設1
+    z-index: 1;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    overflow-y: scroll;
+  
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+    // 用scale讓一開始縮小到看不到
+    transform: scale(0, 0);
+    opacity: 0;
+    transition: transform ease-in-out .3s;
+    transition: opacity .3s;
+  }
+ 
+  &__wrap:target{
+    transform: scale(1, 1);
+    opacity: 1;
+    
+  }
+
+  &__item{
+    position: relative;
+    // 看似黑色容器的區域是用padding撐出來，才可以因應胖扁or瘦高型的圖片長出黑色邊界空間。
+    padding: 60px;
+
+    @include pad{
+      padding: 30px;
+    }
+
+    height: 80%;
+    background-color: black;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  // 圖片多包一層是因為圖片有些很高，自動撐開父層的話，會超出頁面要大肆垂直滑動
+  // 所以用多包一層去刻意限制圖片在__item內的高度佔比，留空間給文字
+  &__image{
+    height: 75%;
+    img{
+      object-fit: contain;
+      height: 100%;
+    }
+  }
+  
+  &__title, &__artist{
+    color: white;
+    }
+  &__artist{
+    margin-bottom: 15px;
+  }  
+}
+
+.close{
+  position: absolute;
+  width: 50px;
+  height: 50px;
+  top: 2.5%;
+  right: 2.5%;
+  border-radius: 50%;
+  text-decoration: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  
+  &::after{
+    content: "✕";
+    color: white;
+    font-size: 40px;
+    font-weight: 700;
+  }
+}
