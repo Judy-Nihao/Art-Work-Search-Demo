@@ -51,6 +51,20 @@ function getData(){
     })
 
     getMasonry();
+
+    // const art = document.querySelectorAll(".art");
+    // const lightboxWrap = document.querySelectorAll(".lightbox__wrap");
+    // const lightboxItem = document.querySelectorAll(".lightbox__item");
+  
+    // lightboxWrap.forEach((wrap)=>{
+    //   wrap.addEventListener("click",function(e){
+    //     // console.log(e.target, e.currentTarget);
+    //     if(e.target == e.currentTarget ){
+          
+    //       // e.currentTarget.style.setProperty("opacity", "0");
+    //     };
+    //   })
+    // })
     
   })
     .catch((err)=>{
@@ -104,7 +118,7 @@ function renderCard(info){
     <div class="lightbox">
       <div class="lightbox__wrap" id="${imgID}">
         <div class="lightbox__item">
-          <a href="#" class="close"></a>
+          <a href="#/" class="close"></a>
           <div class="lightbox__image">
             <img src="${imgUrl}" alt="${alt}">
           </div>

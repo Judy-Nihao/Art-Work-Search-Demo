@@ -207,6 +207,7 @@ img{
   display: none;
 }
 
+
 //圖片燈箱
 .lightbox { 
 
@@ -240,7 +241,6 @@ img{
   &__wrap:target{
     transform: scale(1, 1);
     opacity: 1;
-    
   }
 
   &__item{
