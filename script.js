@@ -137,14 +137,15 @@ function renderCard(info){
 
 
 
+// 用原生 JS 撰寫即可，不用另外載入 jQuery
 function getMasonry(){
-    $('.grid').imagesLoaded({ background: true },function() {
-      const masonry = new Masonry(".grid",{ 
-      itemSelector: '.grid-item',
-      columnWidth: ".grid-sizer",
-      gutter: 15,
-      percentPosition: true,
-      // isFitWidth: true // 這個屬性如果加上去圖片會橫向溢出去
+  imagesLoaded(".grid",{ background: true },function() {
+    const masonry = new Masonry(".grid",{ 
+    itemSelector: '.grid-item',
+    columnWidth: ".grid-sizer",
+    gutter: 15,
+    percentPosition: true,
+    // isFitWidth: true // 這個屬性如果加上去圖片會橫向溢出去
     });
 
   });
@@ -152,16 +153,17 @@ function getMasonry(){
 
 
 
-// // window.onload=function(){}
-// function getMasonry(){ 
-//       // 建立一個新的 Masonry 物件
-//       const masonry = new Masonry(grid,{
-//         itemSelector: ".grid-item",
-//         // columnWidth: 200,
-//         columnWidth: ".grid-sizer",
-//         gutter: 0,
-//         percentPosition: true
+// function getMasonry(){
+//     $('.grid').imagesLoaded({ background: true },function() {
+//       const masonry = new Masonry(".grid",{ 
+//       itemSelector: '.grid-item',
+//       columnWidth: ".grid-sizer",
+//       gutter: 15,
+//       percentPosition: true,
+//       // isFitWidth: true // 這個屬性如果加上去圖片會橫向溢出去
 //     });
-// };
+
+//   });
+// }; 
 
 
