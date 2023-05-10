@@ -5,14 +5,17 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="./style.css">
-  <title>Axios 芝加哥美術館作品強搜尋</title>
+  <title>Axios 芝加哥美術館作品牆搜尋</title>
 </head>
 <body>
 <section class="header">
   <div class="header__wrap">
     <div class="header__title">
-      <h1>The Art Institute of Chicago's API</h1>
-      <h2>provides JSON-formatted data as a REST-style service</h2>
+      <h1>The Art Institute of Chicago</h1>
+      <h2>Image Search Demo</h2>
+      <h2>芝加哥藝術博物館美術作品搜尋</h2>
+      <p class="note">建議輸入英文關鍵字</p>
+      <p class="note">試試看 : Japanese, monet, Vincent van Gogh...</p>
     </div>
 
     <form class="container search" id="search" >
@@ -37,13 +40,15 @@
     </ul>
   </a>
 
+  <!-- 燈箱 -->
   <div class="lightbox">
     <div class="lightbox__wrap" id="image_id_01">
       <div class="lightbox__item">
         <a href="#" class="close"></a>
-        <div class="lightbox__image">
-          <img src="https://picsum.photos/843/1800" alt="">
-        </div>
+        <a class="lightbox__image" href="https://picsum.photos/843/1800" target="__blank">
+          
+            <img src="https://picsum.photos/843/1800" alt="">
+        </a>
         <p class="art__title lightbox__title">畫作名稱</p>
         <p class="art__artist lightbox__artist">作者姓名</p>
         <ul class="art__tag">
@@ -52,8 +57,19 @@
       </div>
     </div>
   </div>
-
 </section>
+<section class="container load">
+  <button class="load-more">Load More</button>
+</section>
+
+<footer>
+  <div class="container">
+    <h3>This is a personal demo work.</h3>
+    <p>The data in this response is licensed under a Creative Commons Zero (CC0) 1.0 designation and the Terms and Conditions of artic.edu.</p>
+    <p>For more information about the artworks data, you can go check on<a href="https://api.artic.edu/docs/"  target="_blank"> Art Institute of Chicago API: Documentation</a></p>
+    <a href="https://www.flaticon.com/free-icons/loading" title="loading icons" target="_blank">Loading icons created by Freepik - Flaticon</a>
+  </div>
+</footer>
 
 <!-- script -->
   <script src='https://cdnjs.cloudflare.com/ajax/libs/axios/1.4.0/axios.min.js'></script>

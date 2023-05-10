@@ -3,10 +3,14 @@ const gridItem = document.querySelector(".grid-item");
 const searchForm = document.querySelector("#search")
 const searchBar = document.querySelector("#search__bar");
 const searchBtn = document.querySelector("#search__btn");
+const loadMoreBtn = document.querySelector(".load-more");
 
 
 let q = searchBar.value;
-let endpoint = `https://api.artic.edu/api/v1/artworks/search?q=${q}&query[term][is_public_domain]=true&limit=24&fields=id,title,image_id,artist_display,thumbnail,classification_titles`;
+let limit = 24;
+let endpoint = `https://api.artic.edu/api/v1/artworks/search?q=${q}&query[term][is_public_domain]=true&limit=${limit}&fields=id,title,image_id,artist_display,thumbnail,classification_titles`;
+
+// console.log(endpoint);
 
 let str1 = "";
 let str2 = "";
@@ -28,6 +32,7 @@ searchBtn.addEventListener("click", function(e){
   e.preventDefault();
   q = searchBar.value;
 
+  //只要是按下搜尋按鈕的，一次就只會重新回傳24件作品
   endpoint = `https://api.artic.edu/api/v1/artworks/search?q=${q}&query[term][is_public_domain]=true&limit=24&fields=id,title,image_id,artist_display,thumbnail,classification_titles`;
   console.log(q);
   getData();
@@ -52,19 +57,8 @@ function getData(){
 
     getMasonry();
 
-    // const art = document.querySelectorAll(".art");
-    // const lightboxWrap = document.querySelectorAll(".lightbox__wrap");
-    // const lightboxItem = document.querySelectorAll(".lightbox__item");
-  
-    // lightboxWrap.forEach((wrap)=>{
-    //   wrap.addEventListener("click",function(e){
-    //     // console.log(e.target, e.currentTarget);
-    //     if(e.target == e.currentTarget ){
-          
-    //       // e.currentTarget.style.setProperty("opacity", "0");
-    //     };
-    //   })
-    // })
+    // 本來容器有一張背景圖片示意載入中，只要美術圖卡瀑布流排版完成，就讓載入示意圖消失。
+    grid.style.backgroundImage = "none";
     
   })
     .catch((err)=>{
@@ -119,9 +113,9 @@ function renderCard(info){
       <div class="lightbox__wrap" id="${imgID}">
         <div class="lightbox__item">
           <a href="#/" class="close"></a>
-          <div class="lightbox__image">
+          <a class="lightbox__image" href="${imgUrl}" target="__blank">
             <img src="${imgUrl}" alt="${alt}">
-          </div>
+          </a>
           <p class="art__title lightbox__title">${artTitle}</p>
           <p class="art__artist lightbox__artist">${artist}</p>
           <ul class="art__tag">
@@ -136,7 +130,7 @@ function renderCard(info){
 };
 
 
-
+// 等到api抓到的資料都載入進來DOM之後，才開始進行瀑布流排版
 // 用原生 JS 撰寫即可，不用另外載入 jQuery
 function getMasonry(){
   imagesLoaded(".grid",{ background: true },function() {
@@ -151,19 +145,13 @@ function getMasonry(){
   });
 }; 
 
-
-
-// function getMasonry(){
-//     $('.grid').imagesLoaded({ background: true },function() {
-//       const masonry = new Masonry(".grid",{ 
-//       itemSelector: '.grid-item',
-//       columnWidth: ".grid-sizer",
-//       gutter: 15,
-//       percentPosition: true,
-//       // isFitWidth: true // 這個屬性如果加上去圖片會橫向溢出去
-//     });
-
-//   });
-// }; 
-
-
+// 點擊 Load More 按鈕載入入更多圖片
+// 每次點擊都會累加 8 件作品，然後整個重新渲染圖卡，
+// 從渲染 24件 > 32件 > 40件 > ...  
+// 視覺上看起來就會是每點擊一次就增生 8 件
+loadMoreBtn.addEventListener("click", function(){
+  limit += 8;
+  console.log(limit);
+  endpoint = `https://api.artic.edu/api/v1/artworks/search?q=${q}&query[term][is_public_domain]=true&limit=${limit}&fields=id,title,image_id,artist_display,thumbnail,classification_titles`;
+  getData();
+})

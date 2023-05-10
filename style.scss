@@ -97,7 +97,7 @@ img{
 .search{
   text-align: center;
   &__bar{
-    width: 50%;
+    width: 80%;
     height: 46px;
     padding: 6px 14px;
     outline: none;
@@ -105,20 +105,24 @@ img{
     border-radius: 8px;
     background-color: hsl(0, 0%, 91%);
     margin-right: 5px;
-    @include pad{
-      width: 80%;
-    }
-  }
+  //   @include pad{
+  //     width: 80%;
+  //   }
+  // }
   &__btn{
     background-color: $color__bright;
     line-height: 1;
     font-size: 14px;
     padding: 15px 20px;
+    outline: none;
     border: 1px solid $color__grey;;
+    border: none;
     border-radius: 8px;
     margin: 0;
     cursor: pointer;
+
     &:hover{
+      
       transition-duration: .25s;
       background-color: $color__dark-grey;
       color: white;
@@ -298,4 +302,17 @@ img{
     font-size: 40px;
     font-weight: 700;
   }
+}
+
+//Load More 載入更多
+.load{
+  text-align: center;
+}
+
+.load-more{
+  border: none;
+  background-color: $color__red;
+  color: $color__bright;
+  padding: 16px 26px;
+  border-radius: 10px;
 }
