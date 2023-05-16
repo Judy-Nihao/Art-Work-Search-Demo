@@ -20,12 +20,6 @@ getData();
 console.log("我只會 hi 一次");
 
 
-// searchBar.addEventListener("keyup", function(e){
-//   console.log(searchBar.value);
-//   if (e.key === "Enter") {
-//     console.log("有按Enter");
-//   }
-// });
 
 searchBtn.addEventListener("click", function(e){
   // 阻止 input type="submit" 跳出刷新頁面

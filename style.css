@@ -184,7 +184,7 @@ img {
 .art:hover img {
   transform: scale(1.2);
   transition-duration: 0.3s;
-  filter: brightness(1);
+  filter: brightness(0.7);
 }
 
 
@@ -201,7 +201,7 @@ img {
   border-radius: 10px 10px 0 0;
 }
 .art__imgBox img {
-  filter: brightness(0.8);
+  filter: brightness(1);
 }
 .art__title {
   font-size: 24px;
@@ -250,10 +250,12 @@ img {
   transition: transform ease-in-out 0.3s;
   transition: opacity 0.3s;
 }
+
 .lightbox__wrap:target {
   transform: scale(1, 1);
   opacity: 1;
 }
+
 .lightbox__item {
   position: relative;
   padding: 60px;
@@ -262,6 +264,7 @@ img {
   display: flex;
   flex-direction: column;
   justify-content: center;
+  box-shadow: 0 0 40px 0px rgba(255, 255, 255, .1)
 }
 @media (max-width: 992px) {
   .lightbox__item {
@@ -271,6 +274,11 @@ img {
 .lightbox__image {
   height: 75%;
   margin: 0 auto;
+  transition: border 0.25s linear;
+}
+
+.lightbox__image:hover{
+  border: 4px solid white;
 }
 
 .lightbox__image img {
@@ -302,11 +310,17 @@ img {
   border: none;
   cursor: pointer;
 }
+
 .close::after {
   content: "✕";
   color: white;
   font-size: 40px;
   font-weight: 700;
+  transition: scale .1s linear;
+}
+
+.close:hover::after{
+  scale: 0.85;
 }
 
 .load {
