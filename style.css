@@ -11,7 +11,7 @@
 
 html, body {
   width: 100%;
-  min-width: 480px;
+  min-width: 375px;
   color: #333;
   background-color: #F8F8F8;
   font-family: "Merriweather", "Noto Sans TC", sans-serif, serif;
@@ -256,9 +256,10 @@ img {
   opacity: 1;
 }
 
+/* 燈箱元件內容 */
 .lightbox__item {
   position: relative;
-  padding: 60px;
+  padding: 45px;
   height: 80%;
   background-color: black;
   display: flex;
@@ -266,16 +267,27 @@ img {
   justify-content: center;
   box-shadow: 0 0 40px 0px rgba(255, 255, 255, .1)
 }
-@media (max-width: 992px) {
-  .lightbox__item {
-    padding: 30px;
+
+@media (max-width: 576px) {
+    .lightbox__item {
+      height: 90%;
   }
 }
+
+/* 燈箱圖片 */
 .lightbox__image {
   height: 75%;
   margin: 0 auto;
-  transition: border 0.25s linear;
+  transition: border 0.25s linear;  
 }
+
+@media (max-width: 576px) {
+  .lightbox__image {
+    height: 55%;
+  }
+}
+
+
 
 .lightbox__image:hover{
   border: 4px solid white;
@@ -286,6 +298,11 @@ img {
      object-fit: contain;
   height: 100%;
 }
+
+.lightbox__title{
+  max-width: 45ch;
+}
+
 
 .lightbox__title, .lightbox__artist {
   color: white;
