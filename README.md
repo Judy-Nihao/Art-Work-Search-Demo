@@ -1,6 +1,6 @@
 # Art Institute of Chicago 圖庫 API 串接與資料呈現與搜尋
 
-實作：https://judy-nihao.github.io/Art-Work-Search-Demo/#/
+實作：https://judy-nihao.github.io/Art-Work-Search-Demo
 
 1. 輸入英語關鍵字搜尋博物館館藏
 - 切換搜尋關鍵字後即時渲染頁面
