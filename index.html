@@ -4,6 +4,9 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- box icon -->
+  <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+  <!--  custom CSS-->
   <link rel="stylesheet" href="./style.css">
   <title>芝加哥美術館作品圖庫搜尋</title>
 </head>
@@ -15,12 +18,13 @@
       <h2>Image Search Demo</h2>
       <h2>芝加哥藝術博物館美術作品搜尋</h2>
       <p class="note">建議輸入英文關鍵字</p>
-      <p class="note">試試看 : Japanese, monet, Vincent van Gogh...</p>
+      <p class="note">試試看 : Katsushika Hokusai, Vincent van Gogh, monet ...</p>
     </div>
 
     <form class="container search" id="search" >
-      <input type="search" class="search__bar" id="search__bar" placeholder="請輸入英文關鍵字，例如：monet,Vincent van Gogh..."  value="monet">
-      <input type="submit" value="搜尋" id="search__btn" class="search__btn">
+      <input type="search" class="search__bar" id="search__bar" placeholder="請輸入英文關鍵字"  value="monet">
+      <button id="search__btn" class="search__btn"><i class='bx bx-search'></i>Search</button>
+      <!-- <input type="submit" value="搜尋" id="search__btn" class="search__btn"> -->
       <!-- 當作按鈕的 input type 必須是 submit 才能在按下 Enter 時，把當下 value 傳給「搜尋按鈕」的 click監聽事件  -->
     </form>
   </div>
