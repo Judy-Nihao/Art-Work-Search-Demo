@@ -135,10 +135,14 @@ img {
   
 }
 
+input[type=search]:focus {
+  background-color: transparent;
+}
+
 .search__btn {
   display: flex;
   align-items: center;
-  background-color: hsl(0, 0%, 75%);
+  background-color: hsl(60, 5%,80%);
   line-height: 1;
   font-size: 16px;
   padding: 18px 20px;
@@ -150,10 +154,9 @@ img {
 }
 
 .search__btn:hover {
-  background-color: hsl(0, 0%, 20%);
+  background-color: hsl(0, 0%, 15%);
   color: white;
 }
-
 
 i{
   font-size: 16px;
