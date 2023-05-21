@@ -2,6 +2,21 @@
 @import url("https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;0,900;1,300;1,400;1,700;1,900&display=swap");
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@100;300;400;500;700;900&display=swap');
 
+@mixin pad{
+  @media(max-width:992px){
+    @content;
+  }
+}
+@mixin mobile{
+  @media(max-width: 576px){
+    @content;
+  }
+}
+
+$color__red: #A20832;
+$color__black: #333;
+$container__padding: 20px;
+
 /* 基礎共用設定 */
 * {
   margin: 0;
@@ -13,7 +28,7 @@ html, body {
   width: 100%;
   min-width: 375px;
   color: #333;
-  background-color: #F8F8F8;
+  background-color: #f7f7f7;;
   font-family: "Merriweather", "Noto Sans TC", sans-serif, serif;
 }
 
@@ -40,7 +55,6 @@ img {
 /* 主要區域開始 */
 .header {
   position: relative;
-  /* background-color: #A20832; */
   background-image: url("https://www.artic.edu/iiif/2/8534685d-1102-e1e3-e194-94f6e925e8b0/full/1200,/0/default.jpg");
   background-repeat: no-repeat;
   background-size: cover;
@@ -51,49 +65,54 @@ img {
   align-items: center;
   padding: 100px 0;
   z-index: 1;
-}
 
-.header::before{
-  display: block;
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  content: "";
-  top: 0;
-  left: 0;
-  background-color: black;
-  opacity: 0.3;
-  z-index: -1;
-}
-
-
-@media (max-width: 992px) {
-  .header {
+  @include pad{
     padding: 40px 20px;
   }
+
+  &::before{
+    display: block;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    content: "";
+    top: 0;
+    left: 0;
+    background-color: black;
+    opacity: 0.3;
+    z-index: -1;
+  }
 }
+
 
 .container {
   max-width: 1280px;
   margin: 0 auto;
-  padding: 20px;
+  padding: $container__padding;
 }
 
 .header__title {
   text-align: center;
   margin-bottom: 20px;
+
+  h1 {
+    color: white;
+    font-size: 48px;
+    font-weight: 400;
+    letter-spacing: 3;
+  }
+
+  h2 {
+    margin-top: 20px;
+    color: white;
+    font-weight: 500;
+    @include pad{
+      font-size: 18px;
+    }
+  }
+  
 }
-.header__title h1 {
-  color: white;
-  font-size: 48px;
-  font-weight: 400;
-  letter-spacing: 3;
-}
-.header__title h2 {
-  margin-top: 20px;
-  color: white;
-  font-weight: 500;
-}
+
 
 .note{
   color: white;
@@ -109,12 +128,6 @@ img {
   margin-top: 8px;
 }
 
-
-@media (max-width: 992px) {
-  .header__title h2 {
-    font-size: 18px;
-  }
-}
 
 .search {
   text-align: center;
@@ -142,7 +155,8 @@ input[type=search]:focus {
 .search__btn {
   display: flex;
   align-items: center;
-  background-color: hsl(60, 5%,80%);
+  background-color: seagreen;
+  color: white;
   line-height: 1;
   font-size: 16px;
   padding: 18px 20px;
@@ -155,7 +169,6 @@ input[type=search]:focus {
 
 .search__btn:hover {
   background-color: hsl(0, 0%, 15%);
-  color: white;
 }
 
 i{
@@ -166,18 +179,17 @@ i{
 
 /* 給 Masonry 定義百分比尺寸使用 */
 .grid-sizer {
-  width: calc((100% - 85px) / 4);
-}
-@media (max-width: 992px) {
-  .grid-sizer {
-    width: calc((100% - 55px) / 2);
+  width: calc((100% - (45px + $container__padding * 2)) / 4);
+
+  @include pad{
+      width: calc((100% - (15px + $container__padding * 2)) / 2)
   }
+  
+  @include mobile{
+      width: calc((100% - $container__padding * 2) / 1)
+  }  
 }
-@media (max-width: 576px) {
-  .grid-sizer {
-    width: calc((100% - 40px) / 1);
-  }
-}
+
 
 .grid{
   background-image: url(img/loading-01.png);
@@ -192,7 +204,7 @@ i{
   color: hsl(60, 15%, 20%);
   margin-bottom: 16px;
   padding: 30px 24px;
-  border: 1px solid #F8F8F8;
+  border: 1px solid white;
   border-radius: 10px;
   box-shadow: 0 1px 16px rgba(0, 0, 0, 0.1), 0 1px 1px rgba(0, 0, 0, 0.2);
   cursor: pointer;
@@ -281,50 +293,42 @@ i{
   display: flex;
   flex-direction: column;
   justify-content: center;
-  box-shadow: 0 0 40px 0px rgba(255, 255, 255, .1)
+  box-shadow: 0 0 40px 0px rgba(255, 255, 255, .1);
+  @include mobile{
+    height: 90%;
+  }  
 }
 
-@media (max-width: 576px) {
-    .lightbox__item {
-      height: 90%;
-  }
-}
 
 /* 燈箱圖片 */
 .lightbox__image {
   height: 75%;
   margin: 0 auto;
   transition: border 0.25s linear;  
-}
 
-@media (max-width: 576px) {
-  .lightbox__image {
+  @include mobile{
     height: 55%;
+  }  
+
+  &:hover{
+    border: 4px solid white;
+  }
+
+  img {
+    -o-object-fit: contain;
+       object-fit: contain;
+    height: 100%;
   }
 }
 
 
-
-.lightbox__image:hover{
-  border: 4px solid white;
-}
-
-.lightbox__image img {
-  -o-object-fit: contain;
-     object-fit: contain;
-  height: 100%;
-}
-
 .lightbox__title{
   max-width: 45ch;
-}
-
-
-.lightbox__title, .lightbox__artist {
   color: white;
 }
 
 .lightbox__artist {
+  color: white;
   margin-bottom: 15px;
 }
 
@@ -342,18 +346,18 @@ i{
   background-color: transparent;
   border: none;
   cursor: pointer;
-}
 
-.close::after {
-  content: "✕";
-  color: white;
-  font-size: 40px;
-  font-weight: 700;
-  transition: scale .1s linear;
-}
+  &::after {
+    content: "✕";
+    color: white;
+    font-size: 40px;
+    font-weight: 700;
+    transition: scale .1s linear;
+  }
 
-.close:hover::after{
-  scale: 0.85;
+  &:hover::after{
+    scale: 0.85;
+  }
 }
 
 .load {
@@ -362,17 +366,16 @@ i{
 
 .load-more {
   border: none;
-  background-color: #A20832;
-  color: #F8F8F8;
+  background-color: $color__red;
+  color: white;
   padding: 16px 26px;
   border-radius: 10px;
   cursor: pointer;
-}
 
-
-.load-more:hover{
-  transform: scale(1.05);   
-  transition: .15s ease-out 
+  &:hover{
+    transform: scale(1.05);   
+    transition: .15s ease-out 
+  }  
 }
 
 
@@ -382,21 +385,22 @@ footer{
   margin-top: 40px;
   background-color: gainsboro;
   padding: 40px 0;
+
+  * {
+    margin-bottom: 10px;
+  }
+
+  a {
+    color: dimgrey;
+    display: inline;
+    border-bottom: 1px solid $color__red;
+  }
+
+  a:hover{
+    transition: color .2s ease-out;
+    color: $color__red;
+  }
 }
 
-footer * {
-  margin-bottom: 10px;
-}
-
-footer a {
-  color: dimgrey;
-  display: inline;
-  border-bottom: 1px solid #A20832;
-}
-
-footer a:hover{
-  transition: color .2s ease-out;
-  color: #A20832;
-}
 
 /*# sourceMappingURL=style.css.map */
