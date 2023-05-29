@@ -1,5 +1,4 @@
 const grid = document.querySelector(".grid");
-const gridItem = document.querySelector(".grid-item");
 const searchForm = document.querySelector("#search")
 const searchBar = document.querySelector("#search__bar");
 const searchBtn = document.querySelector("#search__btn");
@@ -51,8 +50,24 @@ function getData(){
 
     getMasonry();
 
-    // 本來容器有一張背景圖片示意載入中，只要美術圖卡瀑布流排版完成，就讓載入示意圖消失。
+    // 本來容器有一張背景圖片示意載入中，只要圖卡瀑布流排版完成，就讓載入示意圖消失。
     grid.style.backgroundImage = "none";
+    const gridItem = grid.querySelectorAll(".grid-item");
+    const closeBtn = grid.querySelectorAll(".close");
+
+    //點開圖卡後禁止燈箱以外的背景滾動
+    gridItem.forEach(item => {
+      item.addEventListener("click", () => {
+        document.body.style.overflow="hidden";
+      })
+    })
+
+    //關閉圖卡後恢復 body 可滾動
+    closeBtn.forEach(btn => {
+      btn.addEventListener("click", () => {
+        document.body.style.overflow="auto";
+      })
+    })
     
   })
     .catch((err)=>{

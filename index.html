@@ -18,14 +18,15 @@
       <h2>Image Search Demo</h2>
       <h2>芝加哥藝術博物館美術作品搜尋</h2>
       <p class="note">建議輸入英文關鍵字</p>
-      <p class="note">試試看 : Katsushika Hokusai, Vincent van Gogh, monet ...</p>
+      <p class="note">試試看 : Vincent van Gogh, Hokusai, Utamaro ...</p>
     </div>
 
     <form class="container search" id="search" >
       <input type="search" class="search__bar" id="search__bar" placeholder="請輸入英文關鍵字"  value="monet">
-      <button id="search__btn" class="search__btn"><i class='bx bx-search'></i>Search</button>
-      <!-- <input type="submit" value="搜尋" id="search__btn" class="search__btn"> -->
-      <!-- 當作按鈕的 input type 必須是 submit 才能在按下 Enter 時，把當下 value 傳給「搜尋按鈕」的 click監聽事件  -->
+      <button type="submit" class="search__btn" id="search__btn"><i class='bx bx-search'></i>Search</button>
+      <!-- 放在 form 標籤內的 button ，若不特別定 type ，預設按下 enter 後，就會觸發 submit 行為。-->
+      <!-- button 如果設定為 type="button" ，鍵盤按下 Enter 變成只會單純重整頁面 -->
+      <!-- <input type="submit"> 等同於 submit button -->
     </form>
   </div>
 </section>
