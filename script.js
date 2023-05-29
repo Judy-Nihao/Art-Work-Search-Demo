@@ -129,7 +129,7 @@ function renderCard(info){
 function getMasonry(){
   imagesLoaded(".grid",{ background: true },function() {
     const masonry = new Masonry(".grid",{ 
-    itemSelector: '.grid-item',
+    itemSelector: ".grid-item",
     columnWidth: ".grid-sizer",
     gutter: 15,
     percentPosition: true,

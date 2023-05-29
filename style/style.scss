@@ -1,6 +1,7 @@
 @charset "UTF-8";
 @import url("https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;0,900;1,300;1,400;1,700;1,900&display=swap");
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@100;300;400;500;700;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500;1,600&display=swap');
 
 @mixin pad{
   @media(max-width:992px){
@@ -29,7 +30,7 @@ html, body {
   min-width: 375px;
   color: #333;
   background-color: #f7f7f7;;
-  font-family: "Merriweather", "Noto Sans TC", sans-serif, serif;
+  font-family: "Merriweather", "Noto Sans TC", "Open Sans", sans-serif, serif;
 }
 
 a {
@@ -192,7 +193,7 @@ i{
 
 
 .grid{
-  background-image: url(img/loading-01.png);
+  background-image: url(../img/loading-01.png);    
   background-repeat: no-repeat;
   background-position: center top 50px;
   background-size: auto;
@@ -232,23 +233,25 @@ i{
   filter: brightness(1);
 }
 .art__title {
-  font-size: 24px;
-  line-height: 1.25;
+  font-size: 22px;
+  line-height: 1.5;
   margin-top: 20px;
   margin-bottom: 14px;
   font-weight: 700;
 }
 .art__artist {
   font-size: 16px;
-  margin-bottom: 14px;
+  letter-spacing: 0.5px;
   font-weight: 300;
+  margin-bottom: 14px;
 }
 .art__tagName {
   display: inline-block;
-  font-size: 12px;
+  font-family: "Open Sans";
+  font-size: 10px;
   background-color: hsl(60, 10%, 93%);
   border-radius: 3px;
-  font-weight: 300;
+  font-weight: 400;
   padding: 1px 6px 2px;
   margin-bottom: 4px;
 }
@@ -287,8 +290,8 @@ i{
 /* 燈箱元件內容 */
 .lightbox__item {
   position: relative;
-  padding: 45px;
-  height: 80%;
+  padding: 50px;
+  height: 85%;
   background-color: black;
   display: flex;
   flex-direction: column;
@@ -336,14 +339,14 @@ i{
   position: absolute;
   width: 50px;
   height: 50px;
-  top: 2.5%;
-  right: 2.5%;
+  top: -20px;
+  right: -20px;
   border-radius: 50%;
   text-decoration: none;
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: transparent;
+  background-color: dimgrey;
   border: none;
   cursor: pointer;
 
