@@ -1,24 +1,29 @@
-# Art Institute of Chicago 圖庫 API 串接與資料呈現與搜尋
+# 實作紀錄：芝加哥藝術博物館圖庫搜尋 API 串接
 
-實作：https://judy-nihao.github.io/Art-Work-Search-Demo
+## 實作網址
+gh-pages
+https://judy-nihao.github.io/Art-Work-Search-Demo
 
-1. 輸入英語關鍵字搜尋博物館館藏
-- 切換搜尋關鍵字後即時渲染頁面
+GitHub Repo
+https://github.com/Judy-Nihao/Art-Work-Search-Demo
 
-2. 瀑布流版面展示作品圖像
-- 結合 Images Loaded 套件
-- 結合 Masonry套件
-
-3. 圖卡點擊切換燈箱展示全圖
-- 點擊圖片另開新視窗看原始大圖
-
-# 筆記
-
-我一直都知道不少博物館有開放特定館藏資料庫，以前不懂得如何串接 API， 頂多是去開放圖庫下載圖片來用。在看了幾個 unsplash 或是 pexels 圖庫 API 串接教學後，想要自己挑戰看看串接博物館的資料，剛好找到 [Art Institute of Chicago API](https://api.artic.edu/docs/#introduction)，有提供館藏圖片 API ，不需要額外申請 token ，只要弄清楚圖片的請求網址架構是怎麼拼組出來的就可以直接使用，很適合作為入門專案。而且芝加哥藝術博物館館藏包含莫內、梵谷、葛飾北齋等大師作品，想到圖庫館藏這麼珍貴就覺得躍躍欲試，嘗試實作出一個圖庫搜尋頁。
+## 實現功能
+- 輸入英語關鍵字搜尋館藏圖像
+- 點擊搜尋按鈕或鍵盤輸入Enter皆可送出搜尋
+- 切換搜尋關鍵字後即時渲染結果
+- 使用瀑布流版面展示圖像
+    - 結合 Images Loaded 套件
+    - 結合 Masonry套件
+- 點擊作品圖卡跳出燈箱展示全圖樣貌
+- 點擊作品圖片另開新視窗看原始大圖
 
 ![image](https://hackmd.io/_uploads/SyAaU4M8h.jpg)
 
-## API 網址結構
+## 筆記
+
+我一直都知道不少博物館有開放特定館藏資料庫，以前不懂得如何串接 API， 頂多是去開放圖庫下載圖片來用。在看了幾個 unsplash 或是 pexels 圖庫 API 串接教學後，想要自己挑戰看看串接博物館的資料，剛好找到 [Art Institute of Chicago API](https://api.artic.edu/docs/#introduction)，有提供館藏圖片 API ，不需要額外申請 token ，只要弄清楚圖片的請求網址架構是怎麼拼組出來的就可以直接使用，很適合作為入門專案。而且芝加哥藝術博物館館藏包含莫內、梵谷、葛飾北齋等大師作品，想到圖庫館藏這麼珍貴就覺得躍躍欲試，嘗試實作出一個圖庫搜尋頁。
+
+### API 網址結構
 
 
 作品本身的相關資訊與作品圖像，是兩個分開的 API，分成：artworks API 和 image API。
@@ -26,6 +31,7 @@
 artworks 資料庫裡面有關於作品的各種資料，例如：作品 id、作品圖片id 等等，必須先在 artworks API 回傳的資料中取得 image_id，再把 image_id 帶入image API 的網址結構，才能組合出最終圖片網址。
 
 >  Our institution serves images via a separate API that is compliant with the IIIF Image API 2.0 (opens new window)specification. Using metadata from this API, you can craft URLs that will allow you to access images of artworks from our collection. [🔗](https://api.artic.edu/docs/#images)
+
 
 
 ###  artworks API 基本結構
@@ -54,8 +60,8 @@ https://api.artic.edu/api/v1/artworks/search?q=vincent&query[term][is_public_dom
 注意：id 和 image_id 是兩個不同的事情。
 ```
 上面這串網址請求後回傳資料結構如下圖
-
 ![image](https://hackmd.io/_uploads/B1WikEM8h.png)
+
 
 
 ### IIIF Image API
@@ -78,10 +84,9 @@ https://www.artic.edu/iiif/2/25c31d8d-21a4-9ea1-1d73-6a2eca4dda7e/full/843,/0/de
 ```
 
 輸入瀏覽器，會得到梵谷知名的畫作 ***The Bedroom 在亞爾的臥室***
-
 ![image](https://hackmd.io/_uploads/By2oeVMIn.png)
 
-## 資料渲染時要記得清空 innerHTML 和 str 字串
+### 資料渲染時要記得清空 innerHTML 和 str 字串
 
 抓回來的資料，根據功能分類存進變數後組出字串，再把字串用 innerHTML 存進 grid 中，渲染出所有藝術品圖卡。
 每次輸入新關鍵字就會觸發 renderCard()，要避免前一次的資料重複疊加渲染。
@@ -108,7 +113,7 @@ grid.innerHTML = str1;
 之前卡在這邊很久鬼打牆.......後來才發現就是沒清空字串搞的鬼！
 
 
-## api 取資料若遇到 null 要用 || (或者計算符)提供另一個備案值
+### api 取資料若遇到 null 要用 || (或者計算符)提供另一個備案值
 
 有些藝術作品是沒有圖片的，也缺乏作品敘述，屬性值直接是 null 。
 
@@ -196,7 +201,7 @@ if(imgID == null){
 
 解決辦法就是寫一個 if 判斷式，判斷 imgID 如果是 null，imgUrl 就直接替換成本地端的另一張圖片相對路徑。
 
-#### 兩種 null 的解決辦法差異
+### 兩種 null 的解決辦法差異
 
 之所以圖片可以直接用 if 判斷式，但是上面的 alt 卻行不通，是因為
 - alt 變數要存的資料是包兩層物件屬性才取到，但是取第一層屬性時就出問提了所以會卡住。
@@ -210,7 +215,7 @@ if(imgID == null){
 堂堂梵谷大畫家結果搜尋出來前24筆就立刻有缺資料的真心心累，但也學到一課。
 
 
-## 關於 Input 搜尋欄
+### 關於 Input 搜尋欄
 
 ![image](https://hackmd.io/_uploads/HJBZ1rGU3.png)
 
@@ -250,7 +255,7 @@ searchBtn.addEventListener("click", function(e){
 
 也就是說，在 form 標籤中， input 欄位內的鍵盤 Enter 行為，跟 button 的 type 是有相關的。
 
-## Masonry 瀑布流排版 / 磚牆排版
+### Masonry 瀑布流排版 / 磚牆排版
 
 需要結合使用 imagesLoaded、 Masonry 2種套件，才能順利呈現瀑布流版面。
 
@@ -295,11 +300,11 @@ function getData(){
       renderCard(dataArr);
     })
     getMasonry();
-  }
+  })
     .catch((err)=>{
       console.log(err);
   });
-;
+};
 
 // 等到 api 資料都載入進來DOM之後，才開始進行瀑布流排版
 function getMasonry(){
@@ -439,7 +444,7 @@ $container__padding: 20px;
 
 
 
-## lightbox 燈箱模式顯示圖卡
+### lightbox 燈箱模式顯示圖卡
 點擊作品圖卡會進入燈箱模式，跳出完整的圖片，圖片點擊後會另開新分頁顯示大圖。
 
 這次的燈箱顯示方式參考 [Kevin Powell](https://www.youtube.com/watch?v=6j5q-hP8sfk) 的純CSS寫法。
