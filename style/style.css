@@ -170,10 +170,22 @@ i {
 }
 
 .grid {
-  background-image: url(../img/loading-01.png);
+  position: relative;
   background-repeat: no-repeat;
-  background-position: center top 50px;
+  background-position: center top 100px;
   background-size: auto;
+
+}
+
+.grid.active{
+  background-image: url(../img/loading-01.png);
+  animation: load 0.85s 2 forwards ;
+}
+
+@keyframes load {
+  0% { background-size: 85px;}
+  50% { background-size: 100px;}
+  100% { background-size: 85px; }
 }
 
 /* 美術圖卡 */

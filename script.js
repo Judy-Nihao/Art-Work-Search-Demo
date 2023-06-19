@@ -14,9 +14,10 @@ let endpoint = `https://api.artic.edu/api/v1/artworks/search?q=${q}&query[term][
 let str1 = "";
 let str2 = "";
 
+// 載入示意圖出現 (網頁初始)
+grid.classList.add("active");
 
 getData();
-console.log("我只會 hi 一次");
 
 
 
@@ -28,13 +29,19 @@ searchBtn.addEventListener("click", function(e){
   //只要是按下搜尋按鈕的，一次就只會重新回傳24件作品
   endpoint = `https://api.artic.edu/api/v1/artworks/search?q=${q}&query[term][is_public_domain]=true&limit=24&fields=id,title,image_id,artist_display,thumbnail,classification_titles`;
   console.log(q);
+
+  // 載入示意圖出現
+  let timeoutBgShow;
+  timeoutBgShow = setTimeout(() => {
+    grid.classList.add("active");
+  }, 400);
+
   getData();
 });
 
 function getData(){
   axios.get(endpoint)
     .then((res)=>{
-      // console.log(res.data.data);
 
       let dataArr = res.data.data;
       renderCard(dataArr);
@@ -45,13 +52,19 @@ function getData(){
       if( style.textContent == "undefined"){
         style.classList.add("is__hidden");
       }
-
     })
+
+
+    // 載入示意圖消失
+    let timeoutBgNone;
+    timeoutBgNone = setTimeout(() => {
+      grid.classList.remove("active");
+      console.log("消失");
+    }, 600);
 
     getMasonry();
 
-    // 本來容器有一張背景圖片示意載入中，只要圖卡瀑布流排版完成，就讓載入示意圖消失。
-    grid.style.backgroundImage = "none";
+
     const gridItem = grid.querySelectorAll(".grid-item");
     const closeBtn = grid.querySelectorAll(".close");
 
@@ -91,12 +104,29 @@ function renderCard(info){
     // 這樣 alt 也會不成立，就改賦值為 || 後面的這段文字
     
     let thumb = item.thumbnail || NaN; 
+
+    // 有些作品例的 item.thumbnail.width 是 null 例如：梵谷的 The Bedroom 
+    // 這樣變數賦值會出錯，所以要先確保 width 這個屬性有東西，才賦予給變數
+    // 必須要 thumbnail 和 thumbnaill.width 都不是 null 
+    let imgMaxWidth;
+
+    if(item.thumbnail !== null && item.thumbnail.width !== null){
+      imgMaxWidth = item.thumbnail.width;
+    };
+    
     let alt = thumb.alt_text || "it's an artpiece but no picture to be shown";
     let categ = item.classification_titles;
     let imgID = item.image_id;
     let imgUrl = `https://www.artic.edu/iiif/2/${imgID}/full/843,/0/default.jpg`;
 
-    if(imgID == null){
+
+    // 有些圖片寬度小於 843 px，要求 843 會無法取得圖片。
+    // 若圖片尺寸小於 843 ， 就以圖片實際寬度尺寸為準
+    // 若作品缺少圖片，根本沒有image_id 資料是 null ，就替換成本地端的「no-pic」示意圖。
+
+    if(imgMaxWidth < 843){
+      imgUrl = `https://www.artic.edu/iiif/2/${imgID}/full/${imgMaxWidth},/0/default.jpg`;
+    }else if (imgID == null){
       imgUrl = "img/no-pic.jpg";
     };
 
