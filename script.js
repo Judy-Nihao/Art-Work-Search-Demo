@@ -34,9 +34,11 @@ searchBtn.addEventListener("click", function(e){
   let timeoutBgShow;
   timeoutBgShow = setTimeout(() => {
     grid.classList.add("active");
-  }, 400);
+  }, 500);
 
   getData();
+
+  searchBar.value = "";
 });
 
 function getData(){
@@ -54,16 +56,13 @@ function getData(){
       }
     })
 
+    getMasonry();
 
     // 載入示意圖消失
     let timeoutBgNone;
     timeoutBgNone = setTimeout(() => {
       grid.classList.remove("active");
-      console.log("消失");
-    }, 600);
-
-    getMasonry();
-
+    }, 800);
 
     const gridItem = grid.querySelectorAll(".grid-item");
     const closeBtn = grid.querySelectorAll(".close");
@@ -193,4 +192,22 @@ loadMoreBtn.addEventListener("click", function(){
   console.log(limit);
   endpoint = `https://api.artic.edu/api/v1/artworks/search?q=${q}&query[term][is_public_domain]=true&limit=${limit}&fields=id,title,image_id,artist_display,thumbnail,classification_titles`;
   getData();
+})
+
+
+// window.onscroll = function(){
+//   console.log('window.onscroll');
+// };
+
+const header = document.querySelector(".header");
+
+
+window.addEventListener("scroll", function(){
+  // console.log(header.offsetHeight);
+
+  if(window.scrollY > 0){
+    header.classList.add("scroll");
+  }else{
+    header.classList.remove("scroll");
+  }
 })

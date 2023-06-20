@@ -26,6 +26,7 @@ $container__padding: 20px;
 }
 
 html, body {
+  position: relative;
   width: 100%;
   min-width: 375px;
   color: #333;
@@ -55,7 +56,8 @@ img {
 
 /* 主要區域開始 */
 .header {
-  position: relative;
+  position: sticky;
+  top: 0;
   background-image: url("https://www.artic.edu/iiif/2/8534685d-1102-e1e3-e194-94f6e925e8b0/full/1200,/0/default.jpg");
   background-repeat: no-repeat;
   background-size: cover;
@@ -96,6 +98,11 @@ img {
   text-align: center;
   margin-bottom: 20px;
 
+  a{
+    line-height: 1.5;
+    transition: line-height 0.15s ease;
+  }
+
   h1 {
     color: white;
     font-size: 48px;
@@ -104,14 +111,33 @@ img {
   }
 
   h2 {
-    margin-top: 20px;
+    margin-top: 10px;
     color: white;
     font-weight: 500;
+    
+
     @include pad{
       font-size: 18px;
     }
   }
   
+}
+
+.header.scroll{
+  // 如果不改成 fixed ，畫面會閃爍
+  position: fixed;
+  width: 100%;
+  padding-top: 0px;
+  padding-bottom: 40px;
+
+  a{
+    line-height: 0;
+  }
+  h1,h2{
+    visibility: none;
+    opacity: 0;
+  }
+
 }
 
 
@@ -193,11 +219,23 @@ i{
 
 
 .grid{
-  background-image: url(../img/loading-01.png);    
   background-repeat: no-repeat;
   background-position: center top 50px;
   background-size: auto;
 }
+
+
+.grid.active{
+  background-image: url(../img/loading-01.png);
+  animation: load 0.85s 2 forwards ;
+}
+
+@keyframes load {
+  0% { background-size: 85px;}
+  50% { background-size: 100px;}
+  100% { background-size: 85px; }
+}
+
 
 /* 美術圖卡 */
 .art {
